@@ -1,0 +1,261 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+\title{Lecture 9 Scribe\\
+Uniform, Exponential, Laplace, and Gamma Random Variables}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Definitions and Notation}
+
+\subsection{Continuous Random Variables — Uniform}
+
+Let
+\[
+X \sim \text{Uniform}(a,b), \qquad a<b.
+\]
+
+\subsubsection*{PDF}
+\[
+f_X(x)=
+\begin{cases}
+\dfrac{1}{b-a}, & a<x<b,\\[6pt]
+0, & \text{elsewhere}.
+\end{cases}
+\]
+
+\subsubsection*{CDF}
+\[
+F_X(x)=
+\begin{cases}
+0, & x<a,\\[6pt]
+\dfrac{x-a}{b-a}, & a<x<b,\\[6pt]
+1, & x>b.
+\end{cases}
+\]
+
+\subsection{Exponential Random Variable}
+
+For parameter $b>0$:
+
+\subsubsection*{PDF}
+\[
+f_X(x)=\frac{1}{b}e^{-x/b}u(x)
+\]
+
+\subsubsection*{CDF}
+\[
+F_X(x)=\left(1-e^{-x/b}\right)u(x)
+\]
+
+\subsection{Laplace Random Variable}
+
+\subsubsection*{PDF}
+\[
+f_X(x)=\frac{1}{2b}\exp\!\left(-\frac{|x|}{b}\right)
+\]
+
+\subsubsection*{CDF}
+\[
+F_X(x)=
+\begin{cases}
+\dfrac12 e^{x/b}, & x<0,\\[6pt]
+1-\dfrac12 e^{-x/b}, & x>0.
+\end{cases}
+\]
+
+\subsection{Gamma Random Variable}
+
+\subsubsection*{PDF}
+\[
+f_X(x)=\frac{(x/b)^{c-1}e^{-x/b}}{b\Gamma(c)}u(x)
+\]
+
+\subsubsection*{CDF}
+\[
+F_X(x)=\frac{\gamma(c,x/b)}{\Gamma(c)}
+\]
+
+\subsection{Gamma Function}
+
+\[
+\Gamma(a)=\int_0^\infty t^{a-1}e^{-t}\,dt
+\]
+
+\subsection{Incomplete Gamma Function}
+
+\[
+\gamma(a,x)=\int_0^x t^{a-1}e^{-t}\,dt
+\]
+
+\section{Assumptions}
+
+\begin{itemize}
+\item Uniform RV assumes all values in $[a,b]$ are equally likely.
+\item Exponential RV is defined for $x\ge 0$.
+\item Laplace RV is symmetric about zero.
+\item Gamma RV parameters are positive.
+\item Unit step function $u(x)$ enforces support.
+\item In optimization examples, travel time is a continuous RV with PDF $f(t)$ and CDF $F(t)$.
+\end{itemize}
+
+\section{Theorems / Results}
+
+\subsection{Special Cases of Gamma RV}
+
+\begin{itemize}
+\item For $b=2$, $c=0.5$: Chi-square random variable.
+\item For $c=1$: Exponential random variable.
+\end{itemize}
+
+\subsection{Movie Theater Optimization}
+
+Optimal departure time:
+\[
+d^* = T - F^{-1}\!\left(\frac{c}{c+k}\right)
+\]
+
+Interpretation: depart such that the probability of arriving early equals
+\[
+\frac{c}{c+k}.
+\]
+
+\section{Proofs and Derivations}
+
+\subsection{Example 2 — Transformation of Exponential RV}
+
+Given
+\[
+f_X(x)=e^{-x}u(x), \qquad F_X(x)=\left(1-e^{-x}\right)u(x).
+\]
+
+\subsubsection*{(a)}
+\[
+\Pr(3X<5)=F_X\!\left(\frac53\right)=1-e^{-5/3}.
+\]
+
+\subsubsection*{(b)}
+\[
+\Pr(3X<y)=F_X\!\left(\frac y3\right)=\left(1-e^{-y/3}\right)u(y).
+\]
+
+\subsubsection*{(c)}
+Let $Y=3X$. Differentiating the CDF gives $f_Y(y)$.
+Conclusion: $Y$ is exponential.
+
+\subsection{Example 4 — Gamma Mean and Variance}
+
+Let $X\sim \text{Gamma}(a,\lambda)$.
+
+\[
+E[X]=\frac{a}{\lambda}
+\]
+
+\[
+E[X^2]=\frac{\Gamma(a+2)}{\lambda^2\Gamma(a)}
+\]
+
+\[
+\text{Var}(X)=\frac{a}{\lambda^2}.
+\]
+
+\section{Worked Examples}
+
+\subsection{Example 1 — Uniform RV}
+
+Let
+\[
+f_\Theta(\theta)=\frac{1}{2\pi}, \quad 0<\theta<2\pi.
+\]
+
+\[
+\Pr(\Theta>3\pi/2)=\frac14.
+\]
+
+Conditional probability:
+\[
+\Pr(\Theta<\pi\mid \Theta>3\pi/2)
+=
+\frac{\Pr(A\cap B)}{\Pr(B)}.
+\]
+
+\[
+\Pr(\cos\Theta<1/2)
+=
+\frac{4\pi/3-2\pi/3}{2\pi}.
+\]
+
+\subsection{Example 3 — Laplace RV}
+
+Given
+\[
+f_W(w)=ce^{-2|w|}.
+\]
+
+Normalization gives
+\[
+c=\frac14.
+\]
+
+Probabilities:
+\[
+\Pr(-1<W<2)
+\]
+
+\[
+\Pr(W>0\mid -1<W<2)=
+\frac{\Pr(0<W<2)}{\Pr(-1<W<2)}.
+\]
+
+\section{Problem Solving 2 — Given CDF}
+
+\[
+F_X(x)=
+\begin{cases}
+0, & x<0,\\
+x^2, & 0<x<1,\\
+1, & x>1.
+\end{cases}
+\]
+
+\subsection*{PDF}
+
+\[
+f_X(x)=2x,\quad 0<x<1.
+\]
+
+\subsection*{Moments}
+
+\[
+\mu_X=\frac23, \qquad \sigma_X^2=\frac1{18}.
+\]
+
+Skewness: negative.
+
+Kurtosis: platykurtic.
+
+\section{Conclusion}
+
+Uniform, Exponential, Laplace, and Gamma random variables were introduced with their PDFs and CDFs.
+
+Special Gamma cases yield Exponential and Chi-square distributions.
+
+Random variable transformations were demonstrated.
+
+Mean and variance of Gamma RV were derived.
+
+Conditional probability and optimization using CDFs were applied.
+
+Final results included optimal departure time and statistical moments from a given CDF.
+
+\end{document}
