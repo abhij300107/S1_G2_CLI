@@ -1,0 +1,172 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{enumitem}
+\geometry{margin=1in}
+\begin{document}
+\begin{center}
+\textbf{Lecture Scribe — CSE400} \\
+\textbf{Lecture 9: Uniform, Exponential, Laplace and Gamma Random Variables}
+\end{center}
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Definitions and Notation}\\
+\textbf{Continuous Random Variable} \\
+A random variable $X$ with probability density function $f_X(x)$ such that
+\[
+P(a \le X \le b) = \int_a^b f_X(x)\,dx
+\]
+\[
+f_X(x) \ge 0, \quad \int_{-\infty}^{\infty} f_X(x)\,dx = 1
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Uniform Random Variable}\\
+A continuous random variable $X \sim U(a,b)$ has PDF:
+\[
+f_X(x) =
+\begin{cases}
+\dfrac{1}{b-a}, & a \le x \le b \\
+0, & \text{otherwise}
+\end{cases}
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Exponential Random Variable}\\
+A random variable $X \sim \mathrm{Exp}(\lambda)$ has PDF:
+\[
+f_X(x) =
+\begin{cases}
+\lambda e^{-\lambda x}, & x \ge 0 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Laplace Random Variable}\\
+A random variable $X \sim \mathrm{Laplace}(\mu,b)$ has PDF:
+\[
+f_X(x) = \frac{1}{2b} e^{-\frac{|x-\mu|}{b}}, \quad -\infty < x < \infty
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Gamma Random Variable}\\
+A random variable $X \sim \mathrm{Gamma}(\alpha,\lambda)$ has PDF:
+\[
+f_X(x) =
+\begin{cases}
+\dfrac{\lambda^\alpha x^{\alpha-1} e^{-\lambda x}}{\Gamma(\alpha)}, & x \ge 0 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+\[
+\Gamma(\alpha) = \int_0^\infty t^{\alpha-1} e^{-t}\,dt
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\newpage
+\textbf{Assumptions}
+\begin{itemize}[noitemsep,topsep=0pt]
+\item $a < b$ for uniform distribution
+\item $\lambda > 0$
+\item $b > 0$ (Laplace scale parameter)
+\item $\alpha > 0, \lambda > 0$ (Gamma distribution)
+\end{itemize}
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Theorem / Results}
+\textbf{Uniform Distribution}
+\textbf{Uniform Distribution}
+\[
+E[X] = \frac{a+b}{2}
+\]
+\[
+\mathrm{Var}(X) = \frac{(b-a)^2}{12}
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Exponential Distribution}
+\[
+E[X] = \frac{1}{\lambda}
+\]
+\[\quad Var(X) = \frac{1}{\lambda^2}
+\]
+\textbf{Memoryless Property}
+\[
+P(X > s+t \mid X > s) = P(X > t)
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Laplace Distribution}
+\[
+E[X] = \mu
+\]
+\[\ Var(X) = 2b^2
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Gamma Distribution}
+\[
+E[X] = \frac{\alpha}{\lambda}
+\]
+\[Var(X) = \frac{\alpha}{\lambda^2}
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Proof / Derivation}\\
+\textbf{Mean of Uniform}
+\[
+E[X] = \int_a^b x \frac{1}{b-a} 
+\]
+\[= \frac{1}{b-a} \left[\frac{x^2}{2}\right]_a^b\]
+\[= \frac{a+b}{2}
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\newpage
+\textbf{Mean of Exponential}
+\[
+E[X] = \int_{0}^{\infty} x \lambda e^{-\lambda x}\, dx
+\]
+Integration by parts gives:
+\[
+E[X] = \frac{1}{\lambda}
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Memoryless Property}
+\[
+P(X > s + t \mid X > s) = \frac{P(X > s + t)}{P(X > s)}
+\]
+\[
+= \frac{e^{-\lambda(s+t)}}{e^{-\lambda s}} = e^{-\lambda t}
+\]
+\[
+= P(X > t)
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Mean of Gamma}
+\[
+E[X] = \int_{0}^{\infty} x \, \frac{\lambda^{\alpha} x^{\alpha-1} e^{-\lambda x}}{\Gamma(\alpha)} \, dx
+\]
+\[
+= \frac{\alpha}{\lambda}
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Worked Examples}
+\textbf{Example 1 (Uniform Probability)}
+\[
+If X \sim U(a,b),
+\]
+\[
+P(c \le X \le d) = \int_c^d \frac{1}{b-a} dx = \frac{d-c}{b-a}
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Example 2 (Exponential Probability)}
+\[
+P(X > t) = \int_t^\infty \lambda e^{-\lambda x} dx = e^{-\lambda t}
+\]
+\noindent\rule{\textwidth}{0.6pt}
+\textbf{Example 3 (Gamma Special Case)}
+If $\alpha = 1$,
+\[
+f_X(x) = \lambda e^{-\lambda x}
+\]
+which reduces to exponential distribution.\\
+\noindent\rule{\textwidth}{0.6pt}
+\newpage
+\textbf{Conclusion}
+\begin{itemize}[noitemsep,topsep=0pt]
+\item Uniform distribution has constant density on $[a,b]$
+\item Exponential distribution models waiting time and has memoryless property
+\item Laplace distribution centered at $\mu$ with heavier tails
+\item Gamma distribution generalizes exponential
+\end{itemize}
+\end{document}
