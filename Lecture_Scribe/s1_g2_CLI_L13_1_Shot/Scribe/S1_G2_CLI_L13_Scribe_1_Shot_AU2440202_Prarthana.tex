@@ -1,0 +1,316 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{enumitem}
+\geometry{margin=1in}
+
+\title{\textbf{Lecture Scribe -- Tutorial 1}}
+\author{
+Course: CSE 400 -- Fundamentals of Probability in Computing\\
+Institution: Ahmedabad University\\
+School: School of Engineering and Applied Science (SEAS)\\
+Date: February 13, 2026
+}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+%------------------------------------------------
+\section*{Q1}
+
+\textbf{(a) Total number of ways to divide 20 distinct dishes into four groups of five}
+
+\textbf{Concept Used:}
+\begin{itemize}
+    \item Combinations for selection without order
+    \item Division into identical groups
+\end{itemize}
+
+\textbf{Formula Used:}
+\[
+\frac{1}{4!}
+\binom{20}{5}
+\binom{15}{5}
+\binom{10}{5}
+\binom{5}{5}
+\]
+
+\textbf{Notation:}
+\[
+\binom{n}{k} : \text{Number of ways of selecting } k \text{ objects from } n
+\]
+\[
+4! : \text{Removes ordering among groups}
+\]
+
+\textbf{Why Used:}
+\begin{itemize}
+    \item Dishes are distinct $\Rightarrow$ use combinations
+    \item Groups are unordered $\Rightarrow$ divide by $4!$
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{(b) Probability that all four platters contain dishes of the same cuisine}
+
+\textbf{Concept Used:}
+\[
+\text{Probability} = \frac{\text{Favorable outcomes}}{\text{Total outcomes}}
+\]
+
+\textbf{Given:}
+\begin{itemize}
+    \item Equal number of dishes per cuisine
+    \item Each cuisine contains 5 dishes
+\end{itemize}
+
+\textbf{Why Used:} Event probability computed as ratio of favorable arrangements to total arrangements.
+
+%------------------------------------------------
+\section*{Q2}
+
+A passenger arrives uniformly between 7:00 and 7:30.
+
+\textbf{Concept Used: Continuous Uniform Distribution}
+
+\[
+X \sim \text{Uniform}(a,b)
+\]
+
+\[
+f_X(x) = \frac{1}{b-a}, \quad a \le x \le b
+\]
+
+\textbf{Notation:}
+\[
+a = 0, \quad b = 30
+\]
+
+\textbf{(a) Wait less than 5 minutes}
+\[
+P(\text{Wait} < 5)
+\]
+
+\textbf{(b) Wait more than 10 minutes}
+\[
+P(\text{Wait} > 10)
+\]
+
+%------------------------------------------------
+\section*{Q3}
+
+\[
+P(\text{Late}) = 0.15
+\]
+\[
+P(\text{Early}) = 0.25
+\]
+\[
+P(\text{Late} \cap \text{Early}) = 0.08
+\]
+
+\textbf{Find:}
+\[
+P(\text{Early} \mid \text{Late})
+\]
+
+\textbf{Concept Used: Conditional Probability}
+
+\[
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+\]
+
+%------------------------------------------------
+\section*{Q4}
+
+\[
+\lambda = 0.2
+\]
+
+\textbf{Concept Used: Poisson Distribution}
+
+\[
+P(X=k) = \frac{e^{-\lambda} \lambda^k}{k!}
+\]
+
+\textbf{(a) 0 errors}
+\[
+P(X=0) = e^{-0.2}
+\]
+
+\textbf{(b) 2 or more errors}
+\[
+P(X \ge 2) = 1 - P(X=0) - P(X=1)
+\]
+
+%------------------------------------------------
+\newpage
+\section*{Q5}
+
+\[
+\lambda = 3.5
+\]
+
+\textbf{Concept Used: Poisson Distribution}
+
+\textbf{(a)}
+\[
+P(X \ge 2) = 1 - P(X=0) - P(X=1)
+\]
+
+\textbf{(b)}
+\[
+P(X \le 1) = P(X=0) + P(X=1)
+\]
+
+%------------------------------------------------
+\section*{Q6}
+
+\[
+X \sim \text{Poisson}(\lambda = 3)
+\]
+
+\textbf{(a)}
+\[
+P(X \ge 3) = 1 - P(X=0) - P(X=1) - P(X=2)
+\]
+
+\textbf{(b)}
+\[
+P(X \ge 3 \mid X \ge 1)
+\]
+
+\[
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+\]
+
+%------------------------------------------------
+\section*{Q7}
+
+\[
+f_X(x) = \frac{1}{\sqrt{8\pi}} \exp\left(-\frac{(x+3)^2}{8}\right)
+\]
+
+\textbf{Concept Used: Normal Distribution}
+
+\[
+X \sim N(\mu, \sigma^2)
+\]
+
+\[
+\mu = -3, \quad \sigma^2 = 4
+\]
+
+\textbf{Standardization:}
+\[
+Z = \frac{X-\mu}{\sigma}
+\]
+
+\textbf{Q-function:}
+\[
+Q(x) = P(Z > x)
+\]
+
+\[
+P(X \le 0)
+\]
+\[
+P(X > 4)
+\]
+\[
+P(|X+3| < 2)
+\]
+\[
+P(|X-2| > 1)
+\]
+
+%------------------------------------------------
+\newpage
+\section*{Q8}
+
+\[
+n = 12
+\]
+
+\textbf{Concept Used: Binomial Distribution}
+
+\[
+P(X=k) = \binom{n}{k} \theta^k (1-\theta)^{n-k}
+\]
+
+\[
+\sum_{k=8}^{12} \binom{12}{k} \theta^k (1-\theta)^{12-k}
+\]
+
+%------------------------------------------------
+\section*{Q9}
+
+\[
+p(i) = c \frac{\lambda^i}{i!}, \quad i=0,1,2,\dots
+\]
+
+\textbf{Normalization Condition:}
+\[
+\sum_{i=0}^{\infty} p(i) = 1
+\]
+
+\[
+c \sum_{i=0}^{\infty} \frac{\lambda^i}{i!} = 1
+\]
+
+\[
+c e^{\lambda} = 1
+\]
+
+\[
+c = e^{-\lambda}
+\]
+
+\textbf{(a)}
+\[
+P(X=0) = e^{-\lambda}
+\]
+
+\textbf{(b)}
+\[
+P(X>2) = 1 - P(X=0) - P(X=1) - P(X=2)
+\]
+
+%------------------------------------------------
+\newpage
+\section*{Q10}
+
+System of $n$ independent components.
+
+\textbf{Concept Used: Binomial Distribution}
+
+\[
+P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
+\]
+
+\textbf{(a)}
+
+5-component system:
+\[
+P(X \ge 3)
+\]
+
+3-component system:
+\[
+P(X \ge 2)
+\]
+
+\textbf{(b)}
+
+\[
+P(X \ge k+1) \quad \text{for } n=2k+1
+\]
+
+\[
+P(X \ge k) \quad \text{for } n=2k-1
+\]
+
+\end{document}
