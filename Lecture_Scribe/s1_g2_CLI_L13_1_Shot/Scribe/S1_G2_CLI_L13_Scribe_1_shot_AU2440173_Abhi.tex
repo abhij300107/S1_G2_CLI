@@ -1,0 +1,144 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, geometry}
+\geometry{margin=1in}
+
+\title{CSE 400 -- Tutorial 1 Formula Sheet}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Combinatorics}
+
+\textbf{Partitioning into equal groups (order irrelevant)}
+\[
+\frac{n!}{(k!)^m \, m!} \quad \text{where } n = km
+\]
+\textbf{Combinations}
+
+\[
+\binom{n}{r} = \frac{n!}{r!(n-r)!}
+\]
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Classical Probability}
+
+\[
+P(A) = \frac{\text{Number of favorable outcomes}}{\text{Total number of outcomes}}
+\]
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Continuous Uniform Distribution}
+
+For $X \sim U(a,b)$:
+\[
+P(X \le x) = \frac{x-a}{b-a}, \quad a \le x \le b
+\]
+\[
+P(X > x) = \frac{b-x}{b-a}
+\]
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Conditional Probability}
+
+\[
+P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+\]
+
+\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Poisson Distribution}
+
+\textbf{PMF}
+
+\[
+P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}, \quad k = 0,1,2,\dots
+\]
+\textbf{Zero occurrence}
+
+\[
+P(X = 0) = e^{-\lambda}
+\]
+\textbf{Cumulative forms}
+
+\[
+P(X \ge r) = 1 - \sum_{k=0}^{r-1} \frac{e^{-\lambda}\lambda^k}{k!}
+\]
+
+\[
+P(X \le r) = \sum_{k=0}^{r} \frac{e^{-\lambda}\lambda^k}{k!}
+\]
+\textbf{Conditional (Poisson)}
+\[
+P(X \ge a \mid X \ge b) = \frac{P(X \ge a)}{P(X \ge b)}, \quad a \ge b
+\]
+\noindent\rule{\textwidth}{0.4pt}
+
+\section*{Normal Distribution}
+
+\textbf{Standardization}
+
+\[
+Z = \frac{X - \mu}{\sigma}
+\]
+\textbf{Q-function relation}
+
+\[
+Q(x) = P(Z > x)
+\]
+
+\[
+P(Z \le x) = 1 - Q(x)
+\]
+\textbf{Symmetry}
+
+\[
+Q(-x) = 1 - Q(x)
+\]
+\textbf{Interval probability}
+
+\[
+P(|Z| < a) = 1 - 2Q(a)
+\]
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Binomial Distribution}
+
+\textbf{PMF}
+
+\[
+P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+\]
+\textbf{Cumulative (at least/at most)}
+\[
+P(X \ge r) = \sum_{k=r}^{n} \binom{n}{k} p^k (1-p)^{n-k}
+\]
+
+\[
+P(X \le r) = \sum_{k=0}^{r} \binom{n}{k} p^k (1-p)^{n-k}
+\]
+\noindent\rule{\textwidth}{0.4pt}
+\section*{System Reliability (at least half working)}
+
+For $n$ independent components:
+\[
+P(\text{system works}) =
+\sum_{k=\lceil n/2 \rceil}^{n}
+\binom{n}{k} p^k (1-p)^{n-k}
+\]
+\noindent\rule{\textwidth}{0.4pt}
+
+\section*{Poisson-type PMF Normalization}
+
+If
+
+\[
+p(i) = c \frac{\lambda^i}{i!}, \quad i = 0,1,2,\dots
+\]
+then
+
+\[
+\sum_{i=0}^{\infty} p(i) = 1 \;\Rightarrow\; c = e^{-\lambda}
+\]
+\noindent\rule{\textwidth}{0.4pt}
+\begin{center}
+\textbf{End of Formula Sheet}
+\end{center}
+\end{document}
