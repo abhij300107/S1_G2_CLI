@@ -1,0 +1,256 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Lecture Scribe}
+\author{Course: CSE400 -- Fundamentals of Probability in Computing}
+\date{Topic: Joint Random Variables and Joint Distributions \\ Lectures: L15--L18}
+
+\begin{document}
+
+\maketitle
+
+\section{Definitions and Notation}
+
+\subsection{Joint Random Variables}
+
+Let $X$ and $Y$ be two random variables defined on the same probability space.  
+The pair $(X,Y)$ is called a \textbf{joint random variable}.
+
+\subsection{Joint Probability Mass Function (Discrete Case)}
+
+For discrete random variables $X$ and $Y$, the joint PMF is defined as
+
+\[
+p_{X,Y}(x,y) = P(X = x, Y = y)
+\]
+
+This gives the probability that the random variables $X$ and $Y$ simultaneously take values $x$ and $y$.
+
+\subsection{Joint Probability Density Function (Continuous Case)}
+
+For continuous random variables $X$ and $Y$, the joint PDF is defined as
+
+\[
+f_{X,Y}(x,y)
+\]
+
+such that
+
+\[
+P((X,Y) \in A) = \int\int_A f_{X,Y}(x,y)\, dx\, dy
+\]
+
+for any region $A$ in the plane.
+
+\subsection{Joint Cumulative Distribution Function}
+
+The joint CDF of two random variables $X$ and $Y$ is defined as
+
+\[
+F_{X,Y}(x,y) = P(X \le x, Y \le y)
+\]
+
+\section{Assumptions}
+
+The following assumptions are used in the lecture:
+
+\begin{itemize}
+\item Random variables $X$ and $Y$ are defined on the same probability space.
+\item For the discrete case, probabilities are represented using a joint PMF table.
+\item For the continuous case, probabilities are computed using double integration over a region.
+\item The joint PDF satisfies non-negativity and normalization conditions.
+\item The joint CDF represents cumulative probability up to the point $(x,y)$.
+\end{itemize}
+
+\section{Theorems / Results}
+
+\subsection{Properties of the Joint PMF}
+
+\textbf{Non-negativity}
+
+\[
+p_{X,Y}(x,y) \ge 0
+\]
+
+\textbf{Normalization}
+
+\[
+\sum_x \sum_y p_{X,Y}(x,y) = 1
+\]
+
+\subsection{Properties of the Joint PDF}
+
+\textbf{Non-negativity}
+
+\[
+f_{X,Y}(x,y) \ge 0
+\]
+
+\textbf{Normalization}
+
+\[
+\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} f_{X,Y}(x,y)\, dx\, dy = 1
+\]
+
+\subsection{Joint CDF Expression (Continuous Case)}
+
+\[
+F_{X,Y}(x,y) =
+\int_{-\infty}^{x}\int_{-\infty}^{y}
+f_{X,Y}(u,v)\, du\, dv
+\]
+
+\subsection{Joint CDF Expression (Discrete Case)}
+
+\[
+F_{X,Y}(x,y) =
+\sum_{u \le x}\sum_{v \le y}
+P(X = u, Y = v)
+\]
+
+\subsection{Properties of the Joint CDF}
+
+\[
+0 \le F_{X,Y}(x,y) \le 1
+\]
+
+$F_{X,Y}(x,y)$ is non-decreasing in both arguments.
+
+Limits:
+
+\[
+\lim_{x \to -\infty} F_{X,Y}(x,y) = 0
+\]
+
+\[
+\lim_{y \to -\infty} F_{X,Y}(x,y) = 0
+\]
+
+\[
+\lim_{x,y \to \infty} F_{X,Y}(x,y) = 1
+\]
+
+\section{Proofs / Derivations}
+
+\subsection{Derivation of Joint CDF from Joint PDF}
+
+Starting from the definition:
+
+\[
+F_{X,Y}(x,y) = P(X \le x, Y \le y)
+\]
+
+For continuous random variables:
+
+\[
+F_{X,Y}(x,y) =
+\int_{-\infty}^{x}\int_{-\infty}^{y}
+f_{X,Y}(u,v)\, du\, dv
+\]
+
+This follows from integrating the joint PDF over the region
+
+\[
+(-\infty, x] \times (-\infty, y]
+\]
+
+\subsection{Probability over a Region (Continuous Case)}
+
+If $A$ is a region in the plane:
+
+\[
+P((X,Y) \in A) =
+\int\int_A f_{X,Y}(x,y)\, dx\, dy
+\]
+
+This represents the probability that the pair $(X,Y)$ lies in region $A$.
+
+\section{Worked Examples}
+
+\subsection{Example 1: Rolling Two Dice}
+
+Let
+
+\[
+X = \text{value on the first die}
+\]
+
+\[
+Y = \text{value on the second die}
+\]
+
+Each die can take values:
+
+\[
+1,2,3,4,5,6
+\]
+
+\subsection{Joint PMF}
+
+Since the dice are fair:
+
+\[
+p_{X,Y}(x,y) = \frac{1}{36}
+\]
+
+for
+
+\[
+x,y \in \{1,2,3,4,5,6\}
+\]
+
+\subsection{Event Example}
+
+Consider the event
+
+\[
+X + Y = 7
+\]
+
+Possible outcomes:
+
+\[
+(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)
+\]
+
+Total outcomes = $6$
+
+Therefore
+
+\[
+P(X+Y=7) = \frac{6}{36} = \frac{1}{6}
+\]
+
+\subsection{Continuous Case Example}
+
+Let $f_{X,Y}(x,y)$ be defined over a region in the plane.
+
+The probability over a region $A$ is obtained using
+
+\[
+P((X,Y) \in A) =
+\int\int_A f_{X,Y}(x,y)\, dx\, dy
+\]
+
+The integration limits correspond to the boundaries of the region shown in the lecture.
+
+\section{Conclusion}
+
+The lecture introduced the concept of joint random variables and their probability distributions.
+
+The following were covered:
+
+\begin{itemize}
+\item Joint PMF for discrete random variables
+\item Joint PDF for continuous random variables
+\item Geometric interpretation of joint distributions
+\item Definition of the joint CDF
+\item Formulas for computing joint CDF in discrete and continuous cases
+\item Properties of the joint CDF
+\item Example of rolling two dice using a joint PMF table
+\end{itemize}
+
+\end{document}
