@@ -1,0 +1,588 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{CSE 400: Fundamentals of Probability in Computing\\
+Tutorial 1 --- Formal Lecture Scribe}
+\date{February 13, 2026}
+
+\begin{document}
+
+\maketitle
+
+School of Engineering and Applied Science, Ahmedabad University
+
+\section{Introduction}
+
+This tutorial covers several foundational topics in probability theory relevant to computing systems, including:
+
+\begin{itemize}
+\item Multinomial counting
+\item Uniform probability models
+\item Conditional probability
+\item Poisson distribution
+\item Gaussian distribution and Q-function
+\item Binomial reliability models
+\item Discrete distribution functions
+\end{itemize}
+
+Each problem illustrates a specific probabilistic model and demonstrates the derivation of the required probability expressions step-by-step.
+
+\section{Multinomial Counting Problem (Food Festival)}
+
+\subsection*{Problem Statement}
+
+Twenty distinct dishes are divided into four platters of five dishes each. The order of dishes within platters and the order of platters themselves are irrelevant.
+
+\begin{enumerate}
+\item Number of possible divisions
+\item Probability that each platter contains dishes from a single cuisine, given that each cuisine has exactly five dishes.
+\end{enumerate}
+
+\subsection*{Solution}
+
+\textbf{(a) Total Number of Arrangements}
+
+There are 20 distinct dishes partitioned into 4 groups of 5 dishes each.
+
+Since:
+
+\begin{itemize}
+\item Order within a group does not matter
+\item Groups themselves are unlabeled
+\end{itemize}
+
+we use the multinomial counting formula.
+
+\[
+\text{Total ways} = \frac{20!}{(5!)^4 4!}
+\]
+
+\textbf{(b) Probability of Cuisine-Pure Platters}
+
+Each cuisine contains exactly five dishes.
+
+Thus, the only way every platter contains a single cuisine is if each cuisine forms exactly one platter.
+
+Because platters are unlabeled, there is exactly one favorable arrangement.
+
+Therefore
+
+\[
+P = \frac{1}{\frac{20!}{(5!)^4 4!}}
+\]
+
+which simplifies to
+
+\[
+P = \frac{(5!)^4 4!}{20!}
+\]
+
+\section{Uniform Distribution Problem (Bus Arrival)}
+
+\subsection*{Problem Statement}
+
+Buses arrive every 15 minutes starting at 7:00 AM. A passenger arrives uniformly at random between 7:00 and 7:30.
+
+Find the probability that the passenger waits:
+
+\begin{enumerate}
+\item Less than 5 minutes
+\item More than 10 minutes
+\end{enumerate}
+
+\subsection*{Solution}
+
+The arrival time is uniformly distributed over a 30-minute interval.
+
+\subsubsection*{(a) Waiting Time $<$ 5 Minutes}
+
+The passenger must arrive within the final 5 minutes before a bus arrives.
+
+Possible intervals:
+
+\begin{itemize}
+\item 7:10--7:15
+\item 7:25--7:30
+\end{itemize}
+
+Total favorable time:
+
+\[
+5 + 5 = 10 \text{ minutes}
+\]
+
+Total sample space:
+
+\[
+30 \text{ minutes}
+\]
+
+Therefore
+
+\[
+P(\text{wait} < 5) = \frac{10}{30} = \frac{1}{3}
+\]
+
+\subsubsection*{(b) Waiting Time $>$ 10 Minutes}
+
+This occurs if the passenger arrives more than 10 minutes before the next bus.
+
+Intervals:
+
+\begin{itemize}
+\item 7:00--7:05
+\item 7:15--7:20
+\end{itemize}
+
+Total favorable time:
+
+\[
+10 \text{ minutes}
+\]
+
+Thus
+
+\[
+P(\text{wait} > 10) = \frac{10}{30} = \frac{1}{3}
+\]
+
+\section{Conditional Probability (Employee Attendance)}
+
+Let
+
+\begin{itemize}
+\item $L$ = employee arrives late
+\item $E$ = employee leaves early
+\end{itemize}
+
+Given:
+
+\[
+P(L)=0.15, \quad P(E)=0.25, \quad P(L\cap E)=0.08
+\]
+
+Find the probability that the employee arrives early given that they leave late.
+
+\subsection*{Solution}
+
+Arriving early is the complement of arriving late:
+
+\[
+L^c
+\]
+
+Leaving late is the complement of leaving early:
+
+\[
+E^c
+\]
+
+First compute
+
+\[
+P(E^c)=1-P(E)=0.75
+\]
+
+Next compute
+
+\[
+P(L\cup E)=P(L)+P(E)-P(L\cap E)
+\]
+
+\[
+=0.15+0.25-0.08
+\]
+
+\[
+=0.32
+\]
+
+Using De Morgan's Law
+
+\[
+P(L^c\cap E^c)=1-P(L\cup E)
+\]
+
+\[
+=1-0.32=0.68
+\]
+
+Therefore
+
+\[
+P(L^c|E^c)=\frac{P(L^c\cap E^c)}{P(E^c)}
+\]
+
+\[
+=\frac{0.68}{0.75}
+\]
+
+\[
+\approx 0.907
+\]
+
+\section{Poisson Distribution (Typographical Errors)}
+
+\subsection*{Definition: Poisson Distribution}
+
+A random variable $X$ following a Poisson distribution with mean $\lambda$ has probability mass function
+
+\[
+P(X=k)=\frac{e^{-\lambda}\lambda^k}{k!}
+\]
+
+\subsection*{Problem}
+
+Expected errors per page:
+
+\[
+\lambda=0.2
+\]
+
+Find
+
+\begin{enumerate}
+\item $P(X=0)$
+\item $P(X\ge2)$
+\end{enumerate}
+
+\subsection*{(a) Probability of Zero Errors}
+
+\[
+P(X=0)=\frac{e^{-0.2}(0.2)^0}{0!}
+\]
+
+\[
+P(X=0)=e^{-0.2}
+\]
+
+\[
+P(X=0)=0.8187
+\]
+
+\subsection*{(b) Probability of Two or More Errors}
+
+Using the complement rule:
+
+\[
+P(X\ge2)=1-P(X=0)-P(X=1)
+\]
+
+\[
+P(X=1)=\frac{e^{-0.2}(0.2)^1}{1!}
+\]
+
+\[
+=0.2e^{-0.2}
+\]
+
+\[
+=0.1637
+\]
+
+Thus
+
+\[
+P(X\ge2)=1-0.8187-0.1637
+\]
+
+\[
+=0.0176\approx0.0175
+\]
+
+\section{Poisson Distribution (Airplane Crashes)}
+
+Let
+
+\[
+X\sim \text{Poisson}(3.5)
+\]
+
+\subsection*{(a) At Least Two Accidents}
+
+\[
+P(X\ge2)=1-P(0)-P(1)
+\]
+
+\[
+P(0)=e^{-3.5}=0.0302
+\]
+
+\[
+P(1)=3.5e^{-3.5}=0.1057
+\]
+
+Thus
+
+\[
+P(X\ge2)=1-0.0302-0.1057
+\]
+
+\[
+=0.8641
+\]
+
+\subsection*{(b) At Most One Accident}
+
+\[
+P(X\le1)=P(0)+P(1)
+\]
+
+\[
+=0.0302+0.1057
+\]
+
+\[
+=0.1359
+\]
+
+\section{Poisson Distribution (Highway Accidents)}
+
+Let
+
+\[
+X\sim \text{Poisson}(3)
+\]
+
+\subsection*{(a) Probability $X\ge3$}
+
+\[
+P(X\ge3)=1-P(0)-P(1)-P(2)
+\]
+
+\[
+P(0)=e^{-3}=0.0498
+\]
+
+\[
+P(1)=3e^{-3}=0.1494
+\]
+
+\[
+P(2)=\frac{3^2}{2!}e^{-3}=0.2240
+\]
+
+Thus
+
+\[
+P(X\ge3)=1-0.4232
+\]
+
+\[
+=0.5768
+\]
+
+\subsection*{(b) Conditional Probability}
+
+\[
+P(X\ge3|X\ge1)=\frac{P(X\ge3)}{P(X\ge1)}
+\]
+
+\[
+P(X\ge1)=1-P(0)=0.9502
+\]
+
+Thus
+
+\[
+P(X\ge3|X\ge1)=\frac{0.5768}{0.9502}
+\]
+
+\[
+\approx0.607
+\]
+
+\section{Gaussian Distribution and Q-Function}
+
+Given PDF
+
+\[
+f_X(x)=\frac{1}{\sqrt{8\pi}}\exp\left(-\frac{(x+3)^2}{8}\right)
+\]
+
+Comparing with the Gaussian form
+
+\[
+\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-m)^2}{2\sigma^2}\right)
+\]
+
+we obtain
+
+\[
+m=-3,\quad \sigma^2=4,\quad \sigma=2
+\]
+
+Relations:
+
+\[
+F_X(x)=\Phi\left(\frac{x-m}{\sigma}\right)
+\]
+
+\[
+P(X>x)=Q\left(\frac{x-m}{\sigma}\right)
+\]
+
+Results:
+
+\[
+P(X\le0)=\Phi\left(\frac{3}{2}\right)=1-Q\left(\frac{3}{2}\right)
+\]
+
+\[
+P(X>4)=Q\left(\frac{7}{2}\right)
+\]
+
+\[
+|X+3|<2 \Rightarrow -5<X<-1
+\]
+
+\[
+P=\Phi(1)-\Phi(-1)=2\Phi(1)-1
+\]
+
+\[
+=1-2Q(1)
+\]
+
+\[
+|X-2|>1
+\]
+
+\[
+P=F_X(1)+P(X>3)
+\]
+
+\[
+=1-Q(2)+Q(3)
+\]
+
+\section{Jury Decision Problem}
+
+Let
+
+\begin{itemize}
+\item $\theta$ = probability a juror makes the correct decision
+\item $\alpha$ = probability defendant is guilty
+\end{itemize}
+
+If the defendant is innocent, a correct verdict requires at most 7 guilty votes.
+
+\[
+\sum_{i=5}^{12}\binom{12}{i}\theta^i(1-\theta)^{12-i}
+\]
+
+If the defendant is guilty, a correct verdict requires at least 8 guilty votes.
+
+\[
+\sum_{i=8}^{12}\binom{12}{i}\theta^i(1-\theta)^{12-i}
+\]
+
+Therefore the total probability of a correct decision is
+
+\[
+\alpha\sum_{i=8}^{12}\binom{12}{i}\theta^i(1-\theta)^{12-i}
++
+(1-\alpha)\sum_{i=5}^{12}\binom{12}{i}\theta^i(1-\theta)^{12-i}
+\]
+
+\section{Poisson PMF Identification}
+
+Given
+
+\[
+p(i)=c\frac{\lambda^i}{i!}
+\]
+
+Using normalization
+
+\[
+\sum_{i=0}^{\infty}p(i)=1
+\]
+
+\[
+c\sum_{i=0}^{\infty}\frac{\lambda^i}{i!}=1
+\]
+
+Since
+
+\[
+e^x=\sum_{i=0}^{\infty}\frac{x^i}{i!}
+\]
+
+we obtain
+
+\[
+ce^\lambda=1
+\]
+
+\[
+c=e^{-\lambda}
+\]
+
+Results
+
+\[
+P(X=0)=e^{-\lambda}
+\]
+
+\[
+P(X>2)=1-e^{-\lambda}-\lambda e^{-\lambda}-\frac{\lambda^2 e^{-\lambda}}{2}
+\]
+
+\section{Reliability of Communication Systems}
+
+Model
+
+Each component functions independently with probability $p$.
+
+The system works if at least half of the components function.
+
+\subsection*{(a) Comparison of 5-Component and 3-Component Systems}
+
+For 5 components:
+
+\[
+\binom{5}{3}p^3(1-p)^2+\binom{5}{4}p^4(1-p)+p^5
+\]
+
+For 3 components:
+
+\[
+\binom{3}{2}p^2(1-p)+p^3
+\]
+
+The inequality simplifies to
+
+\[
+3(p-1)^2(2p-1)>0
+\]
+
+Thus
+
+\[
+p>\frac{1}{2}
+\]
+
+\subsection*{(b) General Result}
+
+For systems with $2k+1$ and $2k-1$ components, the difference in success probabilities is
+
+\[
+\binom{2k-1}{k}p^k(1-p)^k(2p-1)
+\]
+
+Since the coefficient is positive,
+
+\[
+P_{2k+1}>P_{2k-1}
+\]
+
+iff
+
+\[
+p>\frac{1}{2}
+\]
+
+\end{document}
